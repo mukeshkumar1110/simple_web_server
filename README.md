@@ -39,6 +39,6 @@ with socketserver.TCPServer(("", PORT), MyHandler) as httpd:
     httpd.serve_forever()
 ```
 # OUTPUT:
-![alt text](<Screenshot 2025-02-26 155627.png>)
+![alt text](<Screenshot 2025-02-28 105042.png>)
 # RESULT:
 The program for implementing simple webserver is executed successfully.
