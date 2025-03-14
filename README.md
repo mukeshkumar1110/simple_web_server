@@ -22,23 +22,33 @@ Testing the webserver.
 
 # PROGRAM:
 ```
-import http.server
-import socketserver
-
-PORT = 8000
-
-class MyHandler(http.server.SimpleHTTPRequestHandler):
+from http.server import HTTPServer, BaseHTTPRequestHandler
+content = """
+<!DOCTYPE html>
+<html>
+<head>
+<title>My webserver</title>
+</head>
+<body>
+<h1>Welcome<h1>
+</body>
+</html>
+"""
+class myhandler(BaseHTTPRequestHandler):
     def do_GET(self):
+        print("request received")
         self.send_response(200)
-        self.send_header("Content-type", "text/html")
+        self.send_header('content-type', 'text/html; charset=utf-8')
         self.end_headers()
-        self.wfile.write(b"<html><body><h1>Hi Hello</h1></body></html>")
+        self.wfile.write(content.encode())
+server_address = ('',8000)
+httpd = HTTPServer(server_address,myhandler)
+print("my webserver is running...")
+httpd.serve_forever()
 
-with socketserver.TCPServer(("", PORT), MyHandler) as httpd:
-    print(f"Serving at port {PORT}")
-    httpd.serve_forever()
 ```
 # OUTPUT:
-![alt text](<Screenshot 2025-02-28 105042.png>)
+![image](https://github.com/user-attachments/assets/80427ad3-2ccf-4b59-ba73-f4409f6cf495)
+
 # RESULT:
 The program for implementing simple webserver is executed successfully.
